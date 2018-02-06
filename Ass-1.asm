@@ -1,0 +1,53 @@
+.MODEL SMALL
+.STACK 100h
+
+.DATA    
+ST DB 'Enter the fist number (0-9): $'
+STT DB 0AH,0DH,'Enter the second number (0-9): $'
+ST1 DB 0AH,0DH, 'The summation is: $'
+A DB ?
+B DB ?
+D DB ?
+
+.CODE
+PROC MAIN
+MOV AX, @DATA
+MOV DS,AX
+
+LEA DX,ST
+MOV AH,9
+INT 21H
+
+MOV AH,1
+INT 21h
+SUB AL,30h
+MOV A,AL
+
+LEA DX,STT
+MOV AH,9
+INT 21H
+
+MOV AH,1
+INT 21h
+SUB AL,30h
+MOV B,AL
+
+
+MOV AL,A
+ADD AL,B
+ADD AL,30h
+MOV D,AL
+
+LEA DX,ST1
+MOV AH,9
+INT 21H
+
+MOV DL,D
+MOV AH,2
+INT 21H 
+
+MOV AH, 4CH
+INT 21H
+   
+    MAIN ENDP
+END MAIN

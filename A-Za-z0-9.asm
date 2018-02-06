@@ -1,0 +1,68 @@
+.MODEL SMALL
+.STACK 100h
+.DATA
+
+.CODE
+MAIN PROC
+MOV AX,@DATA
+MOV DS,AX
+MOV BL,41h
+MOV CX,26d
+
+next_letter:
+MOV DL,BL
+MOV AH,2
+int 21h
+ADD BL,1h
+
+MOV DL,20H
+MOV AH,2
+int 21h
+LOOP next_letter 
+
+MOV DL,0Ah
+MOV AH,2
+int 21h 
+MOV DL,0Dh
+MOV AH,2
+int 21h 
+
+MOV BL,61h
+MOV CX,26d
+
+next_lower:
+MOV DL,BL
+MOV AH,2
+int 21h
+ADD BL,1h
+
+MOV DL,20H
+MOV AH,2
+int 21h 
+LOOP next_lower
+
+MOV DL,0Ah
+MOV AH,2
+int 21h
+MOV DL,0Dh
+MOV AH,2
+int 21h 
+
+MOV BL,30h
+MOV CX,10d
+
+next_num:
+MOV DL,BL
+MOV AH,2
+int 21h
+ADD BL,1h
+
+MOV DL,20H
+MOV AH,2
+int 21h 
+LOOP next_num
+
+MOV AH,4CH
+INT 21H 
+ENDP MAIN
+END

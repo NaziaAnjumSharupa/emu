@@ -1,0 +1,88 @@
+.MODEL SMALL
+.STACK 100h
+
+.DATA    
+ST DB 'Enter the value of Number 1: $'
+STT DB 0AH,0DH,'Enter the value of Number 2: $'
+STTT DB 0AH,0DH,'Enter the value of Number 3: $' 
+ST1 DB 0AH,0DH, 'The result is: $'
+ST2 DB 0AH,0DH, 'Number 1 is: $'
+ST3 DB 0AH,0DH, 'Number 2 is: $'
+ST4 DB 0AH,0DH, 'Number 3 is: $'
+A DB ?
+B DB ?
+C DB ?
+D DB ?
+
+.CODE
+PROC MAIN
+MOV AX, @DATA
+MOV DS,AX
+
+LEA DX,ST
+MOV AH,9
+INT 21H
+
+MOV AH,1
+INT 21h
+MOV A,AL
+
+LEA DX,STT
+MOV AH,9
+INT 21H
+
+MOV AH,1
+INT 21h
+MOV B,AL
+
+LEA DX,STTT
+MOV AH,9
+INT 21H
+
+MOV AH,1
+INT 21h
+MOV C,AL
+
+LEA DX,ST2
+MOV AH,9
+INT 21h
+
+MOV DL,A
+MOV AH,2
+INT 21H
+
+LEA DX,ST3
+MOV AH,9
+INT 21h
+
+MOV DL,B
+MOV AH,2
+INT 21H
+
+LEA DX,ST4
+MOV AH,9
+INT 21h
+
+MOV DL,C
+MOV AH,2
+INT 21H
+
+LEA DX,ST1
+MOV AH,9
+INT 21H
+
+MOV AL,A
+SUB AL,30h
+ADD AL,B 
+SUB AL,30h
+ADD AL,C  
+MOV D,AL
+
+MOV DL,D
+MOV AH,2
+INT 21H
+MOV AH, 4CH
+INT 21H
+   
+    MAIN ENDP
+END MAIN
